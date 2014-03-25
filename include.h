@@ -26,4 +26,6 @@ int getWords(char *fileName);
 int search(char *origin,char *pattern);
 int strCleanToken(char *);
 int cleanToken(char *,char *);
+int topWord(char *,char *);
+
 #endif

@@ -27,9 +27,10 @@ int getLines(char *fileName){
 /*处理字符串(去标点，去多余空格，大写换小写)*/
 int strCleanToken(char *pattern){
     char *p = pattern;
-	char *buf = (char*)malloc(sizeof(char)*strlen(pattern));
+	char *buf = (char*)malloc(sizeof(char)*strlen(pattern)+1);
     char ch,pre = ' ';
     int i = 0;
+	memset(buf,0,sizeof(char)*strlen(pattern)+1);
     while(*p!='\0'){
         if((*p>='a'&&*p<='z')||(*p>='A'&&*p<='Z')||(*p>='0'&&*p<='9')){
             if(*p>='A'&&*p<='Z'){
@@ -46,11 +47,12 @@ int strCleanToken(char *pattern){
 		pre = ch;
 		p++;
     }
+	buf[i] = '\0';
 	memset(pattern,0,strlen(pattern)*sizeof(char));
 	strcpy(pattern,buf);
+	/*printf("pattern after process is :%s\n",pattern);*/
     return 1;
 }
-
 
 int cleanToken(char *inName,char *outName){
 	FILE *fpIn,*fpOut;
@@ -177,7 +179,6 @@ int search(char *originName,char *pattern){
 		strCleanToken(buf);
 		if(i = bfFind(buf,pattern)){
 			printf("line :%d col :%d\t",lineNumber,i);	
-			//printLine(originName,lineNumber);
 			puts(temp);
 			flag = 0;
 			count++;
@@ -192,3 +193,7 @@ int search(char *originName,char *pattern){
 	return 1;
 }
 
+int topWord(char *main,char *pattern){
+	
+	return 1;
+}

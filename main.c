@@ -12,6 +12,7 @@ int main(int argc,char **argv){
 	char pattern[BUFF_LEN];
 	char outName[] = "out.dat";
 	char *cmd,*firstArg,*secondArg,*pStr,*pT;
+
 	if(argc<1){
 		printf("please input a filename as argument\n");
 		return -1;
@@ -44,9 +45,9 @@ int main(int argc,char **argv){
 			}
 		}else if(strcmp(firstArg,"search")==0){
 			search(argv[1],secondArg);
+		}else if(strcmp(firstArg,"top")==0){
+			topWord(argv[1],secondArg);
 		}
 	}
 	return 1;
 }
-
-
