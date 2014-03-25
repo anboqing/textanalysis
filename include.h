@@ -21,9 +21,9 @@
 #define BUFF_LEN 1024
 
 int getLines(char *fileName);
-int cleanToken(char *inName,char *outName);
 int getCharacters(char*name);
 int getWords(char *fileName);
-int search(char *origin,char *fileName,char *pattern);
-
+int search(char *origin,char *pattern);
+int strCleanToken(char *);
+int cleanToken(char *,char *);
 #endif

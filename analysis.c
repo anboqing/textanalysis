@@ -24,6 +24,33 @@ int getLines(char *fileName){
 	fclose(fpIn);
 	return lines;
 }
+/*处理字符串(去标点，去多余空格，大写换小写)*/
+int strCleanToken(char *pattern){
+    char *p = pattern;
+	char *buf = (char*)malloc(sizeof(char)*strlen(pattern));
+    char ch,pre = ' ';
+    int i = 0;
+    while(*p!='\0'){
+        if((*p>='a'&&*p<='z')||(*p>='A'&&*p<='Z')||(*p>='0'&&*p<='9')){
+            if(*p>='A'&&*p<='Z'){
+                ch = *p+32;
+            }else{
+                ch = *p;
+            }
+        }else{
+            ch = ' ';
+        }
+		if(!(ch==' '&&pre==' ')){
+			buf[i++] = ch;
+		}
+		pre = ch;
+		p++;
+    }
+	memset(pattern,0,strlen(pattern)*sizeof(char));
+	strcpy(pattern,buf);
+    return 1;
+}
+
 
 int cleanToken(char *inName,char *outName){
 	FILE *fpIn,*fpOut;
@@ -91,7 +118,6 @@ int bfFind(char *buf,char *pattern){
 		printf("pattern is NULL");
 		return 0;
 	}
-	
 	start = 0;
 	i = start;
 	j = 0;
@@ -134,19 +160,25 @@ void printLine(char *originName,int line){
 	fclose(fp);
 }
 
-int search(char *originName,char *fileName,char *pattern){
+int search(char *originName,char *pattern){
 	int lineLength,lineNumber=0,i,flag = 1,count = 0;
 	char buf[BUFF_LEN];
+	char temp[BUFF_LEN];
 	FILE *fpIn;
-	fpIn = fopen(fileName,"r");
+	strCleanToken(pattern);
+	fpIn = fopen(originName,"r");
 	if(!fpIn){
 		perror("open file:");
 		return -1;
 	}
 	while(NULL!=fgets(buf,sizeof(buf),fpIn)){
+		memset(temp,0,sizeof(char)*BUFF_LEN);
+		strcpy(temp,buf);
+		strCleanToken(buf);
 		if(i = bfFind(buf,pattern)){
 			printf("line :%d col :%d\t",lineNumber,i);	
-			printLine(originName,lineNumber);
+			//printLine(originName,lineNumber);
+			puts(temp);
 			flag = 0;
 			count++;
 		}
