@@ -12,14 +12,11 @@ int main(int argc,char **argv){
 	char pattern[BUFF_LEN];
 	char outName[] = "out.dat";
 	char *cmd,*firstArg,*secondArg,*pStr,*pT;
-
 	if(argc<1){
 		printf("please input a filename as argument\n");
 		return -1;
 	}
-
 	cleanToken(argv[1],outName);
-
 	memset(buf2,0,sizeof(char)*BUFF_LEN);
 	while((cmd = fgets(buf,sizeof(buf),stdin))!=NULL){
 		firstArg = strtok(cmd," ");

@@ -19,7 +19,7 @@ int getLines(char *fileName){
 	while((ch = fgetc(fpIn))!=EOF){
 		if(ch == '\n'){
 			lines++;
-		}	
+		}
 	}
 	fclose(fpIn);
 	return lines;
@@ -193,7 +193,13 @@ int search(char *originName,char *pattern){
 	return 1;
 }
 
-int topWord(char *main,char *pattern){
+int topWord(char *filename,char *num){
+	/* 输出频率最高的 num 个单词 */
+	/* 对num进行处理（因为传进来的可能含有空格）*/
+	int number;
+	strCleanToken(num);
+	number = atoi(num);
+	/* 统计所有单词的频率，（去掉 a the 等无意义的词） */
 	
 	return 1;
 }
